@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Courses - Index</title>
+        {% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'courses/css/main.css' %}">
+	</head>
+	<body>
+		<div class='formContainer'>
+			<h3>Add a new course</h3>
+			<form action='/submit_course' method='POST'>
+				{% csrf_token %}
+				<label for='name'>Name:</label>
+				<input type='text' name='name' id='name'>
+				<label for='description'>Description:</label>
+				<textarea name='description' id='description'></textarea>
+				<input type='submit' name='submit' value='Add'>
+			</form>
+		</div>
+		<div class='coursesContainer'>
+			<ul class='coursesList'>
+				<ul class='topBar'>
+					<li class='col1'><p>Course Name</p></li>
+					<li class='col2'><p>Description</p></li>
+					<li class='col3'><p>Date Added</p></li>
+					<li class='col4'><p>Actions</p></li>
+				</ul>
+				{% for course in courses %}
+				<ul class='courseInfo'>
+					<li class='col1'><p>{{course.name}}</p></li>
+					<li class='col2'><p>{{course.description.text}}</p></li>
+					<li class='col3'><p>{{course.created_at|date:'M j Y g:m A'}}</p></li>
+					<li class='col4'><a href='/destroy/{{course.id}}'>remove</a></li>
+				</ul>
+				{% endfor %}
+			</ul>
+		</div>
+	</body>
+</html>

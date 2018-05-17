@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Courses - Delete</title>
+	</head>
+	<body>
+		<p>ARE YOU SURE YOU WANT TO DELETE THIS COURSE?</p>
+		<p>Course Name: {{course.name}}</p>
+		<p>Course Description: {{course.description.text}}</p>
+		<form action = '/delete_process' method='POST'>
+			{% csrf_token %}
+			<input type='submit' value='Yes, delete this course'>
+		</form>
+		<a href='/'>Cancel</a>
+	</body>
+</html>
